@@ -1,0 +1,13 @@
+version: '3'
+volumes:
+  task-python-test:
+
+services:
+  task:
+    image: python:3.9-alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - task-python-test:/app
+
