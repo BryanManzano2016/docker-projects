@@ -3,16 +3,17 @@ import time
 import logging
 from logging.handlers import RotatingFileHandler
 from datetime import datetime
+import os
 
 
 def task():
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.INFO)
-    handler = RotatingFileHandler('my_logger.log', maxBytes=2000, backupCount=10)
+    handler = RotatingFileHandler('logger.log', maxBytes=10000, backupCount=2)
     logger.addHandler(handler)
 
     while True:
-        logger.info('This is an info message' + str(datetime.now()))
+        logger.info(os.environ['ID_APP'] + ' - This is an info message - ' + str(datetime.now()))
         time.sleep(5)
 
 

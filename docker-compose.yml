@@ -4,11 +4,23 @@ volumes:
   task-python-test:
 
 services:
-  task:
+  task1:
     image: python:3.9-alpine
     build:
       context: python-daemon
-      dockerfile: python-daemon/Dockerfile
+      dockerfile: Dockerfile
     volumes:
-      - task-python-test:/app
+      - task-python-test:/app1
+    environment:
+      ID_APP: 1
+    # restart: always
+  task2:
+    image: python:3.9-alpine
+    build:
+      context: python-daemon
+      dockerfile: Dockerfile
+    volumes:
+      - task-python-test:/app2
+    environment:
+      ID_APP: 2
 
