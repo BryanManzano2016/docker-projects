@@ -17,6 +17,7 @@ services:
       - task-python-test:/python-daemon
     environment:
       ID_APP: 1
+      URL_SERVER: http://server:5000
     # restart: always
   task2:
     build:
@@ -28,6 +29,7 @@ services:
       - task-python-test:/python-daemon
     environment:
       ID_APP: 2
+      URL_SERVER: http://server:5000
   server:
     build:
       context: ./api-flask
@@ -37,4 +39,4 @@ services:
     volumes:
       - task-python-test:/api-flask
     ports:
-      - "9090:5000"
+    - "9090:5000"
