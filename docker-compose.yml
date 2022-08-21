@@ -1,26 +1,40 @@
 version: '3'
 
+networks:
+  backend:
+
 volumes:
   task-python-test:
 
 services:
   task1:
-    image: python:3.9-alpine
     build:
-      context: python-daemon
+      context: ./python-daemon
       dockerfile: Dockerfile
+    networks:
+      - backend
     volumes:
-      - task-python-test:/app1
+      - task-python-test:/python-daemon
     environment:
       ID_APP: 1
     # restart: always
   task2:
-    image: python:3.9-alpine
     build:
-      context: python-daemon
+      context: ./python-daemon
       dockerfile: Dockerfile
+    networks:
+      - backend
     volumes:
-      - task-python-test:/app2
+      - task-python-test:/python-daemon
     environment:
       ID_APP: 2
-
+  server:
+    build:
+      context: ./api-flask
+      dockerfile: Dockerfile
+    networks:
+      - backend
+    volumes:
+      - task-python-test:/api-flask
+    ports:
+      - "9090:5000"

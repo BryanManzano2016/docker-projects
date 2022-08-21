@@ -1,10 +1,10 @@
 FROM python:3.9-alpine
 
-COPY requirements.txt requirements.txt
+WORKDIR /api-flask
+
+COPY . .
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
-
-COPY . .
 
 CMD ["python", "main.py"]
